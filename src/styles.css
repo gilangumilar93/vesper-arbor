@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+
+  --color-ink: #101411;
+  --color-panel: #1a211c;
+  --color-parchment: #f4ecdf;
+  --color-mist: #a79d8c;
+  --color-gold: #e0b15a;
+  --color-gold-ink: #2a2112;
+  --color-line: #313a32;
+  --color-track: #2a332b;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button,
+  input,
+  label {
+    touch-action: manipulation;
+  }
+}
+
+.studio {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--color-ink);
+  color: var(--color-parchment);
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  background: var(--color-ink);
+}
+
+.stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dock {
+  max-height: 48dvh;
+  overflow-y: auto;
+  border-top: 1px solid var(--color-line);
+  background: var(--color-panel);
+  padding: 1rem;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  user-select: none;
+}
+
+.growbar {
+  height: 2px;
+  margin-top: 0.75rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-track);
+}
+
+.growbar div {
+  height: 100%;
+  width: 100%;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 1;
+}
+
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.75rem;
+  margin: 0;
+  background: transparent;
+}
+
+.range:focus {
+  outline: none;
+}
+
+.range:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-track);
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: -0.5625rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 999px;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 1px var(--color-gold);
+}
+
+.range::-moz-range-track {
+  height: 2px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-track);
+}
+
+.range::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 999px;
+  background: var(--color-gold);
+}
+
+.swatch {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 999px;
+}
+
+.swatch::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.swatch::-webkit-color-swatch {
+  border: 2px solid var(--color-line);
+  border-radius: 999px;
+}
+
+.swatch::-moz-color-swatch {
+  border: 2px solid var(--color-line);
+  border-radius: 999px;
+}
+
+.swatch:focus {
+  outline: none;
+}
+
+.swatch:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.dock::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dock::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--color-line);
+}
+
+@media (min-width: 48rem) {
+  .studio {
+    flex-direction: row;
+  }
+
+  .dock {
+    width: 24rem;
+    height: 100dvh;
+    max-height: none;
+    border-top: 0;
+    border-left: 1px solid var(--color-line);
+    padding: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .growbar div {
+    transition: none;
+  }
+}
